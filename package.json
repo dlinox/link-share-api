@@ -1,7 +1,7 @@
 {
   "name": "linkshareapi",
   "version": "1.0.0",
-  "description": "",
+  "description": "an API to share link",
   "main": "index.js",
   "scripts": {
     "initDb": "node ./src/db/initDb.js",
