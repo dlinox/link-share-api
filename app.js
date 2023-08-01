@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000; // You can change the port if needed
+const PORT = 8000; // You can change the port if needed
 
 // Temporary storage for shared links
 let links = [];
