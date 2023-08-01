@@ -1,10 +1,11 @@
 {
   "name": "linkshareapi",
   "version": "1.0.0",
-  "description": "## Launch App ``` node --watch app.js ```",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "initDb": "node ./src/db/initDb.js",
+    "dev": "nodemon ./app.js"
   },
   "keywords": [],
   "author": "Anita, Evelin y Karol",
@@ -12,6 +13,12 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.46.0",
+    "prettier": "^3.0.0"
   }
 }
