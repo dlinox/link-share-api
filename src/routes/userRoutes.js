@@ -4,7 +4,11 @@ const router = express.Router();
 // Importamos las funciones controladoras finales.
 const {
    registerUserControllers,
+   loginUserController
 } = require('../controllers/users');
 
-router.post('/users', registerUserControllers);
+router.post('/users/register', registerUserControllers);
+
+router.post('/users/login', loginUserController)
+
 module.exports = router;
