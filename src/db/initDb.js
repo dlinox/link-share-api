@@ -1,11 +1,11 @@
-// Leemos el fichero ".env" con "dotenv" y hacemos que todas las variables de dicho fichero
-// esten disponibles en la lista de variables de entorno del proceso actual.
+// Read the ".env" file with "dotenv" and make all the variables from that file
+// available in the current process's environment variables list.
 require('dotenv').config();
 
 const getDb = require('./getDb');
 
 const main = async () => {
-    // Variable que almacenará una conexión con la base de datos.
+    // Variable to hold a connection with the database.
     let connection;
 
     try {
@@ -19,7 +19,7 @@ const main = async () => {
 
         console.log('Creating tables...');
 
-        // Creamos la tabla de usuarios.
+        // Create the users table.
         await connection.query(`
             CREATE TABLE IF NOT EXISTS users (
                 id CHAR(36) PRIMARY KEY NOT NULL,
@@ -33,9 +33,9 @@ const main = async () => {
             )	
         `);
 
-        // Creamos la tabla de entradas.
+        // Create the entries table.
         await connection.query(`
-            CREATE TABLE IF NOT EXISTS entries (
+            CREATE TABLE IF NOT EXISTS links (
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 title VARCHAR(50) NOT NULL,
                 place VARCHAR(30) NOT NULL,
@@ -46,7 +46,7 @@ const main = async () => {
             )
         `);
 
-        // Creamos la tabla de fotos.
+        // Create the entryPhotos table.
         await connection.query(`
             CREATE TABLE IF NOT EXISTS entryPhotos (
                 id CHAR(36) PRIMARY KEY NOT NULL,
@@ -57,7 +57,7 @@ const main = async () => {
             )
         `);
 
-        // Tabla de votos.
+        // Create the entryVotes table.
         await connection.query(`
             CREATE TABLE IF NOT EXISTS entryVotes (
                 id CHAR(36) PRIMARY KEY NOT NULL,
@@ -70,17 +70,17 @@ const main = async () => {
             )
         `);
 
-        console.log('¡Tables created!');
+        console.log('Tables created!');
     } catch (err) {
         console.error(err);
     } finally {
-        // Si existe una conexión la liberamos.
+        // If there is a connection, release it.
         if (connection) connection.release();
 
-        // Cerramos el proceso.
+        // Close the process.
         process.exit();
     }
 };
 
-// Ejecutamos la función anterior.
+// Execute the above function.
 main();
