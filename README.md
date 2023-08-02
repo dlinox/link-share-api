@@ -2,7 +2,7 @@
 
 ## API description
 
-node --watch app.js ** //ask evelin what does this means (--Ana)//
+node --watch app.js ** //ask evelin what does this means (--Ana) It´s the same as nodemon but without dependency//
 
 - API that allows:
     - registration

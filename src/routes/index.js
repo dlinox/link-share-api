@@ -4,10 +4,10 @@ const router = express.Router();
 
 // Importing users and entries routes.
 const userRoutes = require('./userRoutes');
-const entryRoutes = require('./entryRoutes');
+const linksRoutes = require('./linksRoutes');
 
 // indicating express where to find the users and entries routes.
 router.use(userRoutes);
-router.use(entryRoutes);
+router.use(linksRoutes);
 
 module.exports = router;
