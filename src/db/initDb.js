@@ -27,7 +27,7 @@ const main = async () => {
                 username VARCHAR(30) UNIQUE NOT NULL,
                 password VARCHAR(100) NOT NULL,
                 avatar VARCHAR(100),
-                role ENUM('admin', 'normal') DEFAULT 'normal',
+                role ENUM('admin', 'anonymous', 'normal') DEFAULT 'normal',
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
             )	
