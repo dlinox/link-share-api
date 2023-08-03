@@ -13,7 +13,10 @@ const main = async () => {
 
         console.log('Deleting tables...');
 
-        await connection.query('DROP TABLE IF EXISTS likesVotes, links, users');
+
+        await connection.query(
+            'DROP TABLE IF EXISTS likesVotes, photos, links, users'
+        );
 
         console.log('Creating tables...');
 
@@ -43,6 +46,20 @@ const main = async () => {
                 FOREIGN KEY (userId) REFERENCES users(id)
             )
         `);
+
+
+
+          // Create the photos table.
+        await connection.query(`
+			CREATE TABLE IF NOT EXISTS photos (
+				id CHAR(36) PRIMARY KEY NOT NULL,
+				name VARCHAR(100) NOT NULL,
+				linkId CHAR(36) NOT NULL,
+				FOREIGN KEY (linkId) REFERENCES links(id),
+				createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+			)
+		`);
+    
 
         // Create the likes table.
         await connection.query(`
