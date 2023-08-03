@@ -10,8 +10,10 @@ const registerUserController = async (req, res, next) => {
     const { email, password, userName } = req.body;
     const id = uuidv4();
     const hashedPass = await bcrypt.hash(password, 10);
-    const user = new User(id, email, hashedPass, userName);
-    
+    // No funciona
+    //const user = new User(id, email, hashedPass, userName);
+    //const user = { id, email, hashedPass, userName };
+
     let connection;
     try {
         connection = await getDb();
@@ -38,7 +40,7 @@ const registerUserController = async (req, res, next) => {
 
         await connection.query(
             `INSERT INTO users(id, username, email, password) VALUES(?, ?, ?, ?)`,
-            [user.id, user.userName, user.email, user.password]
+            [id, userName, email, hashedPass]
         );
 
         await connection.commit();
@@ -49,6 +51,7 @@ const registerUserController = async (req, res, next) => {
             userName,
             token: getJwtToken(id)
         });
+
     } catch (err) {
         // Si hubo algún problema deshacemos todos los cambios en la base de datos que insertáramos
         // en el bloque try.
@@ -59,7 +62,6 @@ const registerUserController = async (req, res, next) => {
     } finally {
         if (connection) connection.release();
     }
-}
 
 
 module.exports = registerUserController;
