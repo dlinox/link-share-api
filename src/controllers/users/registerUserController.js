@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 
-const User = require('../../models/users');
+const { User } = require('../../models/users');
 const getJwtToken = require('../../helpers/jwt-generator');
 const getDb = require('../../db/getDb');
 
@@ -16,9 +16,23 @@ const registerUserController = async (req, res, next) => {
     try {
         connection = await getDb();
 
-        // comprobar que el id no existe en la base de datos y si existe lanzar error
+        // comprobar que el email no existe en la base de datos y si existe lanzar error
+        let [users] = await connection.query(
+            `SELECT * FROM users WHERE email = ?`,
+            [email]
+        );
 
-        // comprobar que el email no existe en la base de datos y sino lanzar error
+        if (users.length > 0) {
+            throw new Error('El email ya existe');
+        }
+        // comprobar que el userName no existe en la base de datos y sino lanzar error
+        [users] = await connection.query(
+            `SELECT * FROM users WHERE username = ?`,
+            [userName]
+        )
+            if (users.length > 0) {
+                throw new Error('El user name ya existe');
+            }
 
         await connection.beginTransaction();
 
@@ -28,7 +42,13 @@ const registerUserController = async (req, res, next) => {
         );
 
         await connection.commit();
-
+        
+        res.status(201).json({
+            id,
+            email, 
+            userName,
+            token: getJwtToken(id)
+        });
     } catch (err) {
         // Si hubo algún problema deshacemos todos los cambios en la base de datos que insertáramos
         // en el bloque try.
@@ -39,15 +59,6 @@ const registerUserController = async (req, res, next) => {
     } finally {
         if (connection) connection.release();
     }
-
-
-
-    res.status(201).json({
-        id,
-        email, 
-        userName,
-        token: getJwtToken(id)
-    });
 }
 
 
