@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 
-const User = require('../../models/users');
+const { User } = require('../../models/users');
 const getJwtToken = require('../../helpers/jwt-generator');
 const getDb = require('../../db/getDb');
 
@@ -10,8 +10,10 @@ const registerUserController = async (req, res, next) => {
     const { email, password, userName } = req.body;
     const id = uuidv4();
     const hashedPass = await bcrypt.hash(password, 10);
-    const user = new User(id, email, hashedPass, userName);
-    
+    // No funciona
+    //const user = new User(id, email, hashedPass, userName);
+    //const user = { id, email, hashedPass, userName };
+
     let connection;
     try {
         connection = await getDb();
@@ -24,11 +26,10 @@ const registerUserController = async (req, res, next) => {
 
         await connection.query(
             `INSERT INTO users(id, username, email, password) VALUES(?, ?, ?, ?)`,
-            [user.id, user.userName, user.email, user.password]
+            [id, userName, email, hashedPass]
         );
 
         await connection.commit();
-
     } catch (err) {
         // Si hubo algún problema deshacemos todos los cambios en la base de datos que insertáramos
         // en el bloque try.
@@ -40,15 +41,12 @@ const registerUserController = async (req, res, next) => {
         if (connection) connection.release();
     }
 
-
-
     res.status(201).json({
         id,
-        email, 
+        email,
         userName,
-        token: getJwtToken(id)
+        token: getJwtToken(id),
     });
-}
-
+};
 
 module.exports = registerUserController;

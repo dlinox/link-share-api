@@ -13,9 +13,7 @@ const main = async () => {
 
         console.log('Deleting tables...');
 
-        await connection.query(
-            'DROP TABLE IF EXISTS entryVotes, entryPhotos, links, users'
-        );
+        await connection.query('DROP TABLE IF EXISTS likesVotes, links, users');
 
         console.log('Creating tables...');
 
@@ -46,7 +44,6 @@ const main = async () => {
             )
         `);
 
-    
         // Create the likes table.
         await connection.query(`
             CREATE TABLE IF NOT EXISTS likesVotes (
