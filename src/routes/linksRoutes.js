@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Temporary storage for shared links
-let links = [];
 
 // Route to get all shared links
 router.get('/links', (req, res) => {
