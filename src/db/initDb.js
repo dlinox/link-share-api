@@ -38,7 +38,7 @@ const main = async () => {
             CREATE TABLE IF NOT EXISTS links (
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 title VARCHAR(50) NOT NULL,
-                place VARCHAR(30) NOT NULL,
+                url VARCHAR(30) NOT NULL,
                 description TEXT NOT NULL,
                 userId CHAR(36) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
