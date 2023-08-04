@@ -1,7 +1,7 @@
-// Importamos las dependencias.
+// Importing dependencies model
 const jwt = require('jsonwebtoken');
 
-// Importamos los errores.
+// Importing errors
 const {
     notAuthenticatedError,
     invalidCredentialsError,
@@ -23,7 +23,7 @@ const authUser = async (req, res, next) => {
             invalidCredentialsError();
         }
 
-        // añado info user en la req
+        // adding info about the user in the req
         req.user = tokenInfo;
 
         next();

@@ -25,12 +25,12 @@ const loginUserController = async (req, res, next) => {
         });
 
     } catch (err) {
-        // Si hubo algún problema deshacemos todos los cambios en la base de datos que insertáramos
-        // en el bloque try.
+        // If there was any issue, we undo all the changes in the database that we inserted.
+        // In the `try` block.
         await connection.rollback();
 
-        // Arrojamos el error para enviarlo al middleware de error.
-        throw err; // Falta esta parte
+        // We throw the error to send it to the error middleware.
+        throw err; // this part is missing
     } finally {
         if (connection) connection.release();
     }
