@@ -19,5 +19,19 @@ module.exports = {
             code: 'INVALID_CREDENTIALS',
             message: 'Credenciales inválidas',
         };
+    },
+    userWithUserNameAlreadyExitsError() {
+        throw {
+            httpStatus: 401,
+            code: 'INVALID_CREDENTIALS',
+            message:'Ya existe un usuario con este username'
+        }
+    },
+    emailAlreadyRegistered() {
+        throw {
+            httpStatus: 401,
+            code: 'INVALID_CREDENTIALS',
+            message:'El email ya se encuentra registrado'
+        }
     }
 };

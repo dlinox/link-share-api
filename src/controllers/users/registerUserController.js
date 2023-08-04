@@ -4,6 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 const { User } = require('../../models/users');
 const getJwtToken = require('../../helpers/jwt-generator');
 const getDb = require('../../db/getDb');
+const { emailAlreadyRegistered } = require('../../services/errorService');
+const { userWithUserNameAlreadyExitsError } = require('../../services/errorService')
 
 // Función controladora final que agrega una foto a una entrada.
 const registerUserController = async (req, res, next) => {
@@ -25,7 +27,7 @@ const registerUserController = async (req, res, next) => {
         );
 
         if (users.length > 0) {
-            throw new Error('El email ya existe');
+            emailAlreadyRegistered();
         }
         // comprobar que el userName no existe en la base de datos y sino lanzar error
         [users] = await connection.query(
@@ -33,7 +35,7 @@ const registerUserController = async (req, res, next) => {
             [userName]
         )
             if (users.length > 0) {
-                throw new Error('El user name ya existe');
+                userWithUserNameAlreadyExitsError();
             }
 
         await connection.beginTransaction();
@@ -53,12 +55,10 @@ const registerUserController = async (req, res, next) => {
         });
 
     } catch (err) {
-        // Si hubo algún problema deshacemos todos los cambios en la base de datos que insertáramos
-        // en el bloque try.
+        
         await connection.rollback();
 
-        // Arrojamos el error para enviarlo al middleware de error.
-        throw err; // Falta esta parte
+        next(err); 
     } finally {
         if (connection) connection.release();
     }
