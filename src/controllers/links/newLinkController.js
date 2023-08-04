@@ -1,12 +1,12 @@
-// Importamos los modelos.
+// Importing dependencies model
 const insertLinkModel = require('../../models/links/insertLinkModel');
 
-// Función controladora final que agrega una nueva entrada.
+// Final controller function that adds a new entry.
 const newLinkController = async (req, res, next) => {
     try {
         const { title, url, description } = req.body;
 
-        // Insertamos la entrada y obtenemos el id que se le ha asignado.
+        // We insert the entry and obtain the assigned id.
         const linkId = await insertLinkModel(
             title,
             url,
