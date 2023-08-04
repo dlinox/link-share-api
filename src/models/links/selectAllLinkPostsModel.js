@@ -2,7 +2,7 @@
 const getDb = require('../../db/getDb');
 
 // Function that performs a query to the database to obtain the list of links posted.
-const selectAllEntriesModel = async (keyword = '', userId = '') => {
+const selectAllLinkPostsModel = async (keyword = '', userId = '') => {
     let connection;
 
     try {
@@ -35,4 +35,4 @@ const selectAllEntriesModel = async (keyword = '', userId = '') => {
     }
 };
 
-module.exports = selectAllEntriesModel;
+module.exports = selectAllLinkPostsModel;

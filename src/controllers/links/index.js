@@ -1,4 +1,5 @@
 //Importing controllers
+const getLinkController = require("./getLinkController");
 const listLinksController = require("./listLinksController");
 const newLinkController = require("./newLinkController");
 
@@ -6,5 +7,6 @@ const newLinkController = require("./newLinkController");
 module.exports = {
     newLinkController,
     listLinksController,
+    getLinkController
 };
 

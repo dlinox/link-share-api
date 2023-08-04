@@ -10,12 +10,12 @@ const listLinksController = async (req, res, next) => {
         // Since we want to allow a non-logged in user to access this controller,
          // there will be times when "req.user" does not exist. With the question mark we indicate
          // to JavaScript that "user" can be undefined.
-        const entries = await selectAllLinkPostsModel(keyword, req.user?.id);
+        const links = await selectAllLinkPostsModel(keyword, req.user?.id);
 
         res.send({
             status: 'ok',
             data: {
-                entries,
+                links,
             },
         });
     } catch (err) {
