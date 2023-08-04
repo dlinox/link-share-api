@@ -1,9 +1,9 @@
-// Importamos los modelos.
+// Importing dependencies model
 const { selectUserByIdModel } = require('../../models/users');
 
 const getOwnUserController = async (req, res, next) => {
     try {
-        // Obtenemos los datos del usuario.
+        // Obtaining new user data.
         const user = await selectUserByIdModel(req.user.id);
 
         res.send({
