@@ -7,14 +7,16 @@ const { missingFieldsError } = require('../../services/errorService');
 // Controller function that controls a new link entry 
 const newLinkController = async (req, res, next) => {
     try {
-        const { title, url, description } = req.body;
+        const { id, title, url, description } = req.body;
 
         if(!title || !url || !description ) {
-            missingFieldsError();
+            throw missingFieldsError();
+            
         }
 
         // inseting the new link entry in the db and we get the assigned ID
         const linkId = await insertLinkModel(
+            id,
             title,
             url,
             description,
@@ -24,7 +26,7 @@ const newLinkController = async (req, res, next) => {
         res.send({
             status: 'ok',
             data: {
-                entry: {
+                link: {
                     id: linkId,
                     title,
                     url,
@@ -34,6 +36,7 @@ const newLinkController = async (req, res, next) => {
                 },
             },
         });
+
     } catch (err) {
         next(err);
     }
