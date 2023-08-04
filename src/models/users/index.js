@@ -4,6 +4,7 @@ const selectUserByIdModel = require("./selectUserByIdModel")
 const updateUserPassModel = require("./updateUserPassModel")
 
 module.exports = {
-    user,
+    User,
     selectUserByIdModel,
     updateUserPassModel
+}
