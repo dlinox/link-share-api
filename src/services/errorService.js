@@ -22,16 +22,25 @@ module.exports = {
     },
     userWithUserNameAlreadyExitsError() {
         throw {
-            httpStatus: 401,
+            httpStatus: 401, // Unauthorized
             code: 'INVALID_CREDENTIALS',
             message:'Ya existe un usuario con este username'
         }
     },
     emailAlreadyRegistered() {
         throw {
-            httpStatus: 401,
+            httpStatus: 401,// Unauthorized
             code: 'INVALID_CREDENTIALS',
             message:'El email ya se encuentra registrado'
         }
-    }
+    },
+
+missingFieldsError() {
+    throw {
+        httpStatus: 400, // bad request
+        code: 'MISSING FIELDS',
+        message: 'faltan campos',
+    };
+}
+
 };

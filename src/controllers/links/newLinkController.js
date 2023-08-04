@@ -1,17 +1,24 @@
-// Importing dependencies model
+// Importing the model
 const insertLinkModel = require('../../models/links/insertLinkModel');
 
-// Final controller function that adds a new entry.
+//Importing errors
+const { missingFieldsError } = require('../../services/errorService');
+
+// Controller function that controls a new link entry 
 const newLinkController = async (req, res, next) => {
     try {
         const { title, url, description } = req.body;
 
-        // We insert the entry and obtain the assigned id.
+        if(!title || !url || !description ) {
+            missingFieldsError();
+        }
+
+        // inseting the new link entry in the db and we get the assigned ID
         const linkId = await insertLinkModel(
             title,
             url,
             description,
-            //req.user.id
+            req.user.id
         );
 
         res.send({
@@ -22,7 +29,7 @@ const newLinkController = async (req, res, next) => {
                     title,
                     url,
                     description,
-                    //userId: req.user.id,
+                    userId: req.user.id,
                     createdAt: new Date(),
                 },
             },
