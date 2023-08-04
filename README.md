@@ -40,8 +40,8 @@ node --watch app.js ** //ask evelin what does this means (--Ana) It´s the same 
 
 
 ## APP endpoints
-- **POST** - [`/links`] - create a post (URL, title, description) ➡️ `Token` - ana
-- **GET** - [`/links`] - see list of posted posts (including previous days) - ana
+- **POST** - [`/links`] - create a post (URL, title, description) ➡️ `Token` - ana ✅
+- **GET** - [`/links`] - see list of posted links (including previous days) - ana✅
 - **GET**  - [`/links/:linkId`] -  see a specific post **
 - **DELETE** - [`/links/:linkId] - erase previous posts created by user - ana
 - **POST** - [`/links/:linkId/votes`] - like a post - pending

@@ -1,9 +1,17 @@
+//importing dependecies
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 
+// importing model fuction to be able to access the user in the db
 const { User } = require('../../models/users');
+
+//importing function to encrypt passwords
 const getJwtToken = require('../../helpers/jwt-generator');
+
+//importing database
 const getDb = require('../../db/getDb');
+
+//importing errors
 const { emailAlreadyRegistered } = require('../../services/errorService');
 const { userWithUserNameAlreadyExitsError } = require('../../services/errorService')
 

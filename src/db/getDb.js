@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-// We retrieve the necessary environment variables through destructuring.
+// Accessing to the necessary environment variables through destructuring.
 const { MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB } = process.env;
 
 // Variable that stores a group (array) of connections.
@@ -11,19 +11,19 @@ const getDb = async () => {
     try {
         // If the "pool" variable is undefined...
         if (!pool) {
-            // We establish a connection with the database.
+            // Establishing a connection with the database.
             const dbConnection = await mysql.createConnection({
                 host: MYSQL_HOST,
                 user: MYSQL_USER,
                 password: MYSQL_PASS,
             });
 
-            // With the previous connection, we create the database if it doesn't exist.
+            // With the previous connection, create the database if it doesn't exist.
             await dbConnection.query(
                 `CREATE DATABASE IF NOT EXISTS ${MYSQL_DB}`
             );
 
-            // We create a group of connections.
+            // Create a group of connections.
             pool = mysql.createPool({
                 connectionLimit: 10,
                 host: MYSQL_HOST,
@@ -34,7 +34,7 @@ const getDb = async () => {
             });
         }
 
-        // We return a free connection to the database.
+        // Return a free connection to the database.
         return await pool.getConnection();
     } catch (err) {
         console.error(err);
