@@ -1,4 +1,4 @@
-// Importamos los modelos.
+// Importing dependencies model
 const insertLinkModel = require('../../models/links/insertLinkModel');
 
 // Función controladora final que agrega una nueva entrada.
