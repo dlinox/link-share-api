@@ -7,12 +7,12 @@ const getDb = require('../../db/getDb');
 const { emailAlreadyRegistered } = require('../../services/errorService');
 const { userWithUserNameAlreadyExitsError } = require('../../services/errorService')
 
-// Función controladora final que agrega una foto a una entrada.
+// Final controller function that adds a photo to an entry.
 const registerUserController = async (req, res, next) => {
     const { email, password, userName } = req.body;
     const id = uuidv4();
     const hashedPass = await bcrypt.hash(password, 10);
-    // No funciona
+    // Doesn't work
     //const user = new User(id, email, hashedPass, userName);
     //const user = { id, email, hashedPass, userName };
 
@@ -20,7 +20,7 @@ const registerUserController = async (req, res, next) => {
     try {
         connection = await getDb();
 
-        // comprobar que el email no existe en la base de datos y si existe lanzar error
+        // Check if the email doesn't exist in the database, and if it does, throw an error.
         let [users] = await connection.query(
             `SELECT * FROM users WHERE email = ?`,
             [email]
@@ -29,7 +29,7 @@ const registerUserController = async (req, res, next) => {
         if (users.length > 0) {
             emailAlreadyRegistered();
         }
-        // comprobar que el userName no existe en la base de datos y sino lanzar error
+        // Check if the userName doesn't exist in the database, and if it does, throw an error.
         [users] = await connection.query(
             `SELECT * FROM users WHERE username = ?`,
             [userName]

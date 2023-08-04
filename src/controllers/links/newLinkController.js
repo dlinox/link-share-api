@@ -14,7 +14,7 @@ const newLinkController = async (req, res, next) => {
             
         }
 
-        // inseting the new link entry in the db and we get the assigned ID
+        // Inserting the new link entry in the db and we get the assigned ID
         const linkId = await insertLinkModel(
             id,
             title,
