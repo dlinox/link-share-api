@@ -5,7 +5,7 @@ const uuid = require('uuid');
 const getDb = require('../../db/getDb');
 
 // function that goes to the database to insert a new link
-const insertLinkModel = async (title, place, description, userId) => {
+const insertLinkModel = async (title, url, description, userId) => {
     let connection;
 
     try {
@@ -15,9 +15,9 @@ const insertLinkModel = async (title, place, description, userId) => {
         const linkId = uuid.v4();
 
         // create the link post
-        await connection.query(
-            `INSERT INTO links(id, title, place, description, userId) VALUES(?, ?, ?, ?, ?)`,
-            [linkId, title, place, description, userId]
+        const [link] = await connection.query(
+            `INSERT INTO links(title, url, description, userId) VALUES(?, ?, ?, ?)`,
+            [title, url, description, userId]
         );
 
         // returning the id of the link
