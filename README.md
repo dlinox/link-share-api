@@ -39,8 +39,8 @@
 - **PUT**  - [`/users/avatar`] - see avatar ➡️ `Token`  **
 - **PUT** - [`/users/password`] - change password ➡️ `Token` - karol
 - **PUT** - [`/users/email`] || - [`/users/username`] change email and or username ** 
-- **POST** - [`/users/password/recover`] - send an password recovery email **
-- **PUT** - [`/users/password/reset`] - to update the password with a recovery code **
+- **POST** - [`/users/password/recover`] - send an password recovery email ** eve
+- **PUT** - [`/users/password/reset`] - to update the password with a recovery code ** eve
 
 
 ## APP endpoints
@@ -48,7 +48,7 @@
 - **GET** - [`/links`] - see list of posted links (including previous days) - ana✅
 - **GET**  - [`/links/:linkId`] -  see a specific post **
 - **DELETE** - [`/links/:linkId] - erase previous posts created by user - ana
-- **POST** - [`/links/:linkId/votes`] - like a post - pending
+- **POST** - [`/links/:linkId/votes`] - like a post - pending ana
 - **DELETE** - [`/links/:linkId/votes`] - unlike a post **
 
 **
