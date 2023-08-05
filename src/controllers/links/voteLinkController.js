@@ -18,7 +18,7 @@ const voteLinkController = async (req, res, next) => {
         const { value } = req.body;
 
         // Validamos el body con Joi.
-        await validateSchemaService(voteLinkSchema, req.body);
+        await validateSchemaService(voteLinkSchema, req.body, next);
 
         // Obtenemos los detalles de la entrada.
         const entry = await selectLinkPostByIdModel(linkId);

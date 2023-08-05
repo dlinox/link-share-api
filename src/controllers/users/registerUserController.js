@@ -13,19 +13,23 @@ const getDb = require('../../db/getDb');
 
 //importing errors
 const { emailAlreadyRegistered } = require('../../services/errorService');
-const { userWithUserNameAlreadyExitsError } = require('../../services/errorService')
+const { userWithUserNameAlreadyExitsError } = require('../../services/errorService');
+const validateSchemaService = require('../../services/validateSchemaService');
+const { registerUserSchema }= require('../../schema/users');
 
 // Final controller function that adds a user
 const registerUserController = async (req, res, next) => {
-    const { email, password, userName } = req.body;
-    const id = uuidv4();
-    const hashedPass = await bcrypt.hash(password, 10);
-    const user = new User(id, email, hashedPass, userName);
-   
-
     let connection;
     try {
         connection = await getDb();
+
+        const { email, password, userName } = req.body;
+        // Validations
+        await validateSchemaService(registerUserSchema, req.body, next);
+
+        const id = uuidv4();
+        const hashedPass = await bcrypt.hash(password, 10);
+        const user = new User(id, email, hashedPass, userName);
 
         // Check if the email doesn't exist in the database, and if it does, throw an error.
         let [users] = await connection.query(
