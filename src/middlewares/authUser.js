@@ -23,7 +23,7 @@ const authUser = async (req, res, next) => {
             invalidCredentialsError();
         }
 
-        // adding info about the user in the req
+        // Adding info about the user in the req
         req.user = tokenInfo;
 
         next();

@@ -2,11 +2,15 @@
 
 ## API description
 
-node --watch app.js ** //ask evelin what does this means (--Ana) It´s the same as nodemon but without dependency//
+- It is a website where users post entries on links.
 
-- API that allows:
+- Each entry has title, description, url.
+
+- Each entry can be voted with a score between 1 and 5.
+
+- In more detail, this API allows the following actions:
     - registration
-    - annonimus registration (limited to register and vote)
+    - anonymous registration (limited to register and vote)
     - share links (URL, title, description)
     - see history of posting
     - erase a post
@@ -25,7 +29,7 @@ node --watch app.js ** //ask evelin what does this means (--Ana) It´s the same 
 
 3. Run `npm run initDb` to create the necessary tables in the database.
 
-4. Run `npm run dev` to launch the server.
+4. Run `npm run dev` or `node --watch app.js` to launch the server.
 
 
 ## Users Endpoints
@@ -40,8 +44,8 @@ node --watch app.js ** //ask evelin what does this means (--Ana) It´s the same 
 
 
 ## APP endpoints
-- **POST** - [`/links`] - create a post (URL, title, description) ➡️ `Token` - ana
-- **GET** - [`/links`] - see list of posted posts (including previous days) - ana
+- **POST** - [`/links`] - create a post (URL, title, description) ➡️ `Token` - ana ✅
+- **GET** - [`/links`] - see list of posted links (including previous days) - ana✅
 - **GET**  - [`/links/:linkId`] -  see a specific post **
 - **DELETE** - [`/links/:linkId] - erase previous posts created by user - ana
 - **POST** - [`/links/:linkId/votes`] - like a post - pending
