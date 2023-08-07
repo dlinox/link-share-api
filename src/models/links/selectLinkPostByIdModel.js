@@ -23,7 +23,8 @@ const selectLinkPostByIdModel = async (linkId, userId = '') => {
                     L.userId = ? AS owner,
                     AVG(IFNULL(V.value, 0)) AS votes,
                     L.createdAt
-                FROM links L LEFT JOIN votes V ON V.linkId = L.id
+                FROM links L 
+                LEFT JOIN votes V ON V.linkId = L.id
                 INNER JOIN users U ON U.id = L.userId
                 WHERE L.id = ?
                 GROUP BY L.id

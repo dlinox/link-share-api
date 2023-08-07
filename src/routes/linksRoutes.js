@@ -6,19 +6,18 @@ const router = express.Router();
 //Importing intermediate controller functions
 const {
     authUser, 
-    userExists, 
     authUserOptional,
-    linkExists
+    linkPostExists,
+    userExists, 
 }= require('../middlewares');
 
 //Importing final controller functions
 
-const {
-    getLinkController,
-    listLinksController, 
-    voteLinkController,
+const { 
     newLinkController, 
-    
+    listLinksController, 
+    getLinkController, 
+    votePostedLinkController 
 } = require('../controllers/links');
 
 
@@ -29,9 +28,9 @@ router.post('/links', authUser, userExists, newLinkController);
 router.get('/links', authUserOptional, listLinksController);
 
 //Selecting an specific link post by id
-router.get('/links/:linkId', authUserOptional, linkExists, getLinkController)
+router.get('/links/:linkId', authUserOptional, linkPostExists, getLinkController);
 
 //vote a link posted
-router.post('links/:linkId/votes', authUser, userExists, linkExists, voteLinkController);
+router.post('links/:linkId/votes', authUser, userExists, linkPostExists, votePostedLinkController);
 
 module.exports = router;

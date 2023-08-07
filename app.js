@@ -17,22 +17,11 @@ app.use(bodyParser.json());
 // We import the routes. Remember that it is not necessary to indicate the "index.js" file.
 const routes = require('./src/routes');
 
-const {
-    notFoundController,
-    errorController,
-} = require('./src/controllers/errors');
-
 // Middleware that shows the console information about the incoming request.
 app.use(morgan('dev'));
 
 // Middleware that tells express where the routes are.
 app.use(routes);
-
-// Middleware de ruta no encontrada.
-app.use(notFoundController);
-
-// Middleware de error.
-app.use(errorController);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server listening at http://localhost:${process.env.PORT}`);

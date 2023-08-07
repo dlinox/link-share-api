@@ -4,7 +4,7 @@ const getDb = require('../db/getDb');
 // Importamos los errores.
 const { notFoundError } = require('../services/errorService');
 
-const linkExists = async (req, res, next) => {
+const linkPostExists = async (req, res, next) => {
     let connection;
 
     try {
@@ -34,4 +34,4 @@ const linkExists = async (req, res, next) => {
     }
 };
 
-module.exports = linkExists;
+module.exports = linkPostExists;
