@@ -1,35 +1,35 @@
-// Importamos los modelos.
+// Importing models
 const selectLinkPostByIdModel = require('../../models/links/selectLinkPostByIdModel');
-const insertVoteLinkModel = require('../../models/links/insertVoteLinkModel');
+const insertvoteLinkModel = require('../../models/links/insertVoteLinkModel');
 
-// Importamos los servicios. 
+// Importing services
 const validateSchemaService = require('../../services/validateSchemaService');
 
-// Importamos el esquema.
+// Importing schemas
 const voteLinkSchema = require('../../schema/links/voteLinkSchema');
 
-// Importamos los errores. 
-const { cannotVoteOwnEntryError } = require('../../services/errorService');
+// Importing errors
+const { cannotvoteOwnEntryError } = require('../../services/errorService');
 
-// Función controladora final que permite votar una entrada.
+// Final controller function that allows liking on an link.
 const voteLinkController = async (req, res, next) => {
     try {
         const { linkId } = req.params;
         const { value } = req.body;
 
-        // Validamos el body con Joi.
+        // Validate the body with Joi.
         await validateSchemaService(voteLinkSchema, req.body);
 
-        // Obtenemos los detalles de la entrada.
-        const entry = await selectLinkPostByIdModel(linkId);
+        // We get the post details.
+        const link = await selectLinkPostByIdModel(linkId);
 
-        // Si somos los dueños de la entrada lanzamos un error.
-        if (entry.userId === req.user.id) {
-            cannotVoteOwnEntryError();
+        // If we are the owners of the link we throw an error.
+        if (link.userId === req.user.id) {
+            cannotvoteOwnEntryError();
         }
 
-        // Insertamos el voto y obtenemos la nueva media.
-        const votesAvg = await insertVoteLinkModel(value, linkId, req.user.id);
+        // We insert the vote and obtain the new mean.
+        const votesAvg = await insertvoteLinkModel(value, linkId, req.user.id);
 
         res.send({
             status: 'ok',
@@ -37,6 +37,7 @@ const voteLinkController = async (req, res, next) => {
                 votesAvg,
             },
         });
+        
     } catch (err) {
         next(err);
     }

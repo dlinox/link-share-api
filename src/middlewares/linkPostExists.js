@@ -14,13 +14,13 @@ const linkExists = async (req, res, next) => {
         const { linkId } = req.params;
 
         const [links] = await connection.query(
-            `SELECT id FROM entries WHERE id = ?`,
+            `SELECT id FROM links WHERE id = ?`,
             [linkId]
         );
 
-        // Lanzamos un error si la entrada no existe.
+        // we send an error if the link posted doesnt exists.
         if (links.length < 1) {
-            notFoundError('entrada');
+            notFoundError('link');
         }
 
         // Pasamos el control a la siguiente función controladora.

@@ -1,11 +1,11 @@
 const insertLinkModel = require("./insertLinkModel");
-const insertVoteLinkModel = require("./insertVoteLinkModel");
+const insertvoteLinkModel = require("./insertvoteLinkModel");
 const selectAllLinkPostsModel = require("./selectAllLinkPostsModel");
 const selectLinkPostByIdModel = require("./selectLinkPostByIdModel");
 
 module.exports = {
     insertLinkModel,
-    insertVoteLinkModel,
+    insertvoteLinkModel,
     selectLinkPostByIdModel,
     selectAllLinkPostsModel,
 };

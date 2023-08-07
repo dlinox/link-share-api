@@ -14,7 +14,7 @@
     - share links (URL, title, description)
     - see history of posting
     - erase a post
-    - user votes (likes)
+    - user votes (votes)
     - edit user profile 
         - name
         - email
@@ -48,8 +48,8 @@
 - **GET** - [`/links`] - see list of posted links (including previous days) - ana✅
 - **GET**  - [`/links/:linkId`] -  see a specific post **
 - **DELETE** - [`/links/:linkId] - erase previous posts created by user - ana
-- **POST** - [`/links/:linkId/votes`] - like a post - pending
-- **DELETE** - [`/links/:linkId/votes`] - unlike a post **
+- **POST** - [`/links/:linkId/votes`] - vote a post - pending
+- **DELETE** - [`/links/:linkId/votes`] - unvote a post **
 
 **
 

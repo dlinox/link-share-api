@@ -1,9 +1,9 @@
 module.exports = {
-    cannotVoteOwnEntryError() {
+    cannotvoteYourOwnLinkError() {
         throw {
             httpStatus: 403, // Forbidden
-            code: 'CANNOT_VOTE_OWN_ENTRY',
-            message: 'No puedes votar tu propia entrada',
+            code: 'CANNOT_vote_OWN_LINK',
+            message: `You can't vote for your own link`,
         };
     },
     
@@ -11,7 +11,7 @@ module.exports = {
         throw {
             httpStatus: 401,// Unauthorized
             code: 'INVALID_CREDENTIALS',
-            message:'El email ya se encuentra registrado'
+            message:'The email is already registered'
         }
     },
 
@@ -19,7 +19,7 @@ module.exports = {
         throw {
             httpStatus: 401, // Unauthorized
             code: 'INVALID_CREDENTIALS',
-            message: 'Credenciales inválidas',
+            message: 'Invalid credentials',
         };
     },
     
@@ -27,7 +27,7 @@ module.exports = {
         throw {
             httpStatus: 400, // bad request
             code: 'MISSING FIELDS',
-            message: 'faltan campos',
+            message: 'Missing fields',
         };
     },
 
@@ -35,7 +35,7 @@ module.exports = {
         throw {
             httpStatus: 401, // Unauthorized
             code: 'NOT_AUTHENTICATED',
-            message: `Debes enviar un token en el header 'Authorization'`,
+            message: `You must send a token in the header 'Authorization'`,
         };
     },
 
@@ -43,7 +43,7 @@ module.exports = {
         throw {
             httpStatus: 404, // Not Found
             code: 'RESOURCE_NOT_FOUND',
-            message: `El recurso requerido '${resource}' no existe`,
+            message: `The required resource '${resource}' does not exist`,
         };
     },
 
@@ -51,15 +51,15 @@ module.exports = {
         throw {
             httpStatus: 401, // Unauthorized
             code: 'INVALID_CREDENTIALS',
-            message:'Ya existe un usuario con este username'
+            message:'There is already a user with this username'
         }
     },
 
     voteAlreadyExistsError() {
         throw {
             httpStatus: 409, // Conflict
-            code: 'VOTE_ALREADY_EXISTS',
-            message: 'No se puede votar más de una vez la misma entrada',
+            code: 'vote_ALREADY_EXISTS',
+            message: 'You cannot vote more than once for the same link.',
         };
     }
 };

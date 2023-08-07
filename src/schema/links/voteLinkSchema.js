@@ -1,15 +1,15 @@
 const joi = require('joi');
 
-// Modificamos los mensajes de error de Joi que necesitemos.
+// Modify the error messages of Joi that we need.
 const joiErrorMessages = {
-    'any.required': 'El campo "{#key}" es requerido',
-    'number.base': 'El valor de "{#key}" debe ser un número',
-    'number.min': 'El valor de "{#key}" debe ser mayor o igual a 1',
-    'number.max': 'El valor de "{#key}" debe ser menor o igual a 5',
-    'number.integer': 'El valor de "{#key}" debe ser un número entero',
+    'any.required': 'The field "{#key}" is required',
+    'number.base': 'The value of "{#key}" must be a number',
+    'number.min': 'The value of "{#key}" must be greater than or equal to 1',
+    'number.max': 'The value of "{#key}" must be less than equal to 5',
+    'number.integer': 'The value of"{#key}" must be an integer',
 };
 
-// Creamos el esquema de Joi donde comprobamos todas las propiedades necesarias.
+// We create Joi's schema where we check all the necessary properties.
 const voteLinkSchema = joi.object({
     value: joi
         .number()
