@@ -1,7 +1,7 @@
 // Importing models
 const selectLinkPostByIdModel = require('../../models/links/selectLinkPostByIdModel');
 
-// Final controller function that returns an entry with a given id.
+// Final controller function that returns an link posted with a given id.
 const getLinkController = async (req, res, next) => {
     try {
         // We get the id of the link.

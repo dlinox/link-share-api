@@ -4,9 +4,9 @@
 
 - It is a website where users post entries on links.
 
-- Each entry has title, description, url.
+- Each post has title, description, url.
 
-- Each entry can be voted with a score between 1 and 5.
+- Each post can be voted with a score between 1 and 5.
 
 - In more detail, this API allows the following actions:
     - registration

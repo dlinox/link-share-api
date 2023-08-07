@@ -21,7 +21,7 @@ const insertvoteLinkModel = async (value, linkId, userId) => {
         );
 
     // If the length of the votes array is greater than zero we throw an error indicating
-    // that the entry has already been voted on by this user.
+    // that the link has already been voted on by this user.
         if (votes.length > 0) {
             voteAlreadyExistsError();
         }

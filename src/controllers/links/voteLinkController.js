@@ -9,7 +9,7 @@ const validateSchemaService = require('../../services/validateSchemaService');
 const voteLinkSchema = require('../../schema/links/voteLinkSchema');
 
 // Importing errors
-const { cannotvoteOwnEntryError } = require('../../services/errorService');
+const { cannotvoteYourOwnLinkError } = require('../../services/errorService');
 
 // Final controller function that allows liking on an link.
 const voteLinkController = async (req, res, next) => {
@@ -25,7 +25,8 @@ const voteLinkController = async (req, res, next) => {
 
         // If we are the owners of the link we throw an error.
         if (link.userId === req.user.id) {
-            cannotvoteOwnEntryError();
+            cannotvoteYourOwnLinkError();
+            
         }
 
         // We insert the vote and obtain the new mean.

@@ -10,8 +10,7 @@ const selectAllLinkPostsModel = async (keyword = '', userId = '') => {
 
         // Get the list of links posted.
         const [links] = await connection.query(
-            `
-                SELECT 
+            `SELECT 
                     L.id,
                     L.title,
                     L.url, 
