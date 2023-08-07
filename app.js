@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 
+// Importing errors
+const { notFoundController, errorController } = require('./src/controllers/errors');
+
 // We create the server.
 const app = express();
 
@@ -19,6 +22,12 @@ const routes = require('./src/routes');
 
 // Middleware that shows the console information about the incoming request.
 app.use(morgan('dev'));
+
+// Error iddleware
+app.use(errorController);
+
+// Path not found Middleware
+app.use(notFoundController)
 
 // Middleware that tells express where the routes are.
 app.use(routes);
