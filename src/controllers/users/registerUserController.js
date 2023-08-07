@@ -13,20 +13,23 @@ const getDb = require('../../db/getDb');
 
 //importing errors
 const { emailAlreadyRegistered } = require('../../services/errorService');
-const { userWithUserNameAlreadyExitsError } = require('../../services/errorService')
+const { userWithUserNameAlreadyExitsError } = require('../../services/errorService');
+const validateSchemaService = require('../../services/validateSchemaService');
+const { registerUserSchema }= require('../../schema/users');
 
-// Final controller function that adds a photo to an entry.
+// Final controller function that adds a user
 const registerUserController = async (req, res, next) => {
-    const { email, password, userName } = req.body;
-    const id = uuidv4();
-    const hashedPass = await bcrypt.hash(password, 10);
-    // Doesn't work
-    //const user = new User(id, email, hashedPass, userName);
-    //const user = { id, email, hashedPass, userName };
-
     let connection;
     try {
         connection = await getDb();
+
+        const { email, password, userName } = req.body;
+        // Validations
+        await validateSchemaService(registerUserSchema, req.body, next);
+
+        const id = uuidv4();
+        const hashedPass = await bcrypt.hash(password, 10);
+        const user = new User(id, email, hashedPass, userName);
 
         // Check if the email doesn't exist in the database, and if it does, throw an error.
         let [users] = await connection.query(
@@ -50,15 +53,15 @@ const registerUserController = async (req, res, next) => {
 
         await connection.query(
             `INSERT INTO users(id, username, email, password) VALUES(?, ?, ?, ?)`,
-            [id, userName, email, hashedPass]
+            [user.id, user.userName, user.email, user.password]
         );
 
         await connection.commit();
         
         res.status(201).json({
-            id,
-            email, 
-            userName,
+            id: user.id,
+            email: user.email, 
+            userName: user.userName,
             token: getJwtToken(id)
         });
 

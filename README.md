@@ -39,8 +39,8 @@
 - **PUT**  - [`/users/avatar`] - see avatar ➡️ `Token`  **
 - **PUT** - [`/users/password`] - change password ➡️ `Token` - karol
 - **PUT** - [`/users/email`] || - [`/users/username`] change email and or username ** 
-- **POST** - [`/users/password/recover`] - send an password recovery email **
-- **PUT** - [`/users/password/reset`] - to update the password with a recovery code **
+- **POST** - [`/users/password/recover`] - send an password recovery email ** eve
+- **PUT** - [`/users/password/reset`] - to update the password with a recovery code ** eve
 
 
 ## APP endpoints

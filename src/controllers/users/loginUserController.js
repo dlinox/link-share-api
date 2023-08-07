@@ -1,36 +1,48 @@
 const { User } = require('../../models/users');
 const getJwtToken = require('../../helpers/jwt-generator');
 const getDb = require('../../db/getDb');
+const loginUserSchema = require('../../schema/users/loginUserSchema');
+const validateSchemaService = require('../../services/validateSchemaService');
+const bcrypt = require('bcrypt');
+const { invalidCredentialsError } = require('../../services/errorService');
 
 
 const loginUserController = async (req, res, next) => {
-    const { email, password } = req.body;
     let connection;
+    
     try {
         connection = await getDb();
+        const { email, password } = req.body;
+        await validateSchemaService(loginUserSchema, { email, password }, next);
 
         const [users] = await connection.query(
             `SELECT * FROM users WHERE email = ?`,
             [email]
         );
+
+        
         if (users.length === 0) {
-            throw new Error('Este usuario no existe');
+            invalidCredentialsError(); // User not exists in database
         }
 
-        const { password, ...rest } = new User(users[0].id, users[0].email, users[0].password, users[0].username);
+        if (!bcrypt.compareSync(password, users[0].password)) { 
+            invalidCredentialsError(); // passwords aren't equals
+        } 
+
+        const user = new User(users[0].id, users[0].email, users[0].password, users[0].username);
 
         res.status(201).json({
-            ...rest,
-            token: getJwtToken(rest.id)
+            id: user.id,
+            email: user.email, 
+            userName: user.userName,
+            token: getJwtToken(user.id)
         });
 
     } catch (err) {
-        // If there was any issue, we undo all the changes in the database that we inserted.
-        // In the `try` block.
+        
         await connection.rollback();
 
-        // We throw the error to send it to the error middleware.
-        throw err; // this part is missing
+        next(err); 
     } finally {
         if (connection) connection.release();
     }

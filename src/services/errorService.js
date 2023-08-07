@@ -55,6 +55,7 @@ module.exports = {
         }
     },
 
+
     voteAlreadyExistsError() {
         throw {
             httpStatus: 409, // Conflict
