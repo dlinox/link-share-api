@@ -24,8 +24,7 @@ const votePostedLinkController = async (req, res, next) => {
         const link = await selectLinkPostByIdModel(linkId);
 
         // If we are the owners of the link we throw an error.
-        if (link.userId === req.user.id){
-            cannotvoteYourOwnLinkError();
+        if (link.userId === req.user.id){ cannotvoteYourOwnLinkError();
         }
 
         // Insert the vote and obtain the new average.

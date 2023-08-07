@@ -22,7 +22,7 @@ const newLinkController = async (req, res, next) => {
             );
 
         if(!title || !url || !description ) {
-            throw missingFieldsError();
+            throw new  missingFieldsError();
             
         }
 

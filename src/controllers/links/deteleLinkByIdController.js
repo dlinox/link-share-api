@@ -23,8 +23,8 @@ const { cannotDeleteOtherUserLinkError } = require("../../services/errorService"
             status: 'ok',
             message: `the link post with id: ${linkId} has been erased`,
         });
-        } catch (error) {
-        next(error);
+        } catch (err) {
+        next(err);
         }
     };
     
