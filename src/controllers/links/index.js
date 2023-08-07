@@ -1,8 +1,10 @@
 //Importing controllers
+const deteleLinkByIdController = require("./deteleLinkByIdController");
 const getLinkController = require("./getLinkController");
 const listLinksController = require("./listLinksController");
 const newLinkController = require("./newLinkController");
 const votePostedLinkController = require("./votePostedLinkController");
+
 
 //Exporting controllers
 module.exports = {
@@ -10,4 +12,5 @@ module.exports = {
     listLinksController,
     newLinkController,
     votePostedLinkController,
+    deteleLinkByIdController,
 };

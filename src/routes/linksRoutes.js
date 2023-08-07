@@ -17,7 +17,8 @@ const {
     newLinkController, 
     listLinksController, 
     getLinkController, 
-    votePostedLinkController 
+    votePostedLinkController, 
+    deteleLinkByIdController
 } = require('../controllers/links');
 
 
@@ -32,5 +33,7 @@ router.get('/links/:linkId', authUserOptional, linkPostExists, getLinkController
 
 //vote a link posted
 router.post('links/:linkId/votes', authUser, userExists, linkPostExists, votePostedLinkController);
+
+router.delete('links/:linkId', authUser, userExists, linkPostExists, deteleLinkByIdController);
 
 module.exports = router;

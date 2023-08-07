@@ -1,3 +1,4 @@
+const deteleLinkPostByIdModel = require("./deteleLinkPostByIdModel");
 const insertLinkVoteModel = require("./inserLinkVoteModel");
 const insertLinkModel = require("./insertLinkModel");
 const selectAllLinkPostsModel = require("./selectAllLinkPostsModel");
@@ -8,5 +9,6 @@ module.exports = {
     selectLinkPostByIdModel,
     selectAllLinkPostsModel,
     insertLinkVoteModel,
-    
+    deteleLinkPostByIdModel,
+
 };

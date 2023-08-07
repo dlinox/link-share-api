@@ -1,8 +1,16 @@
 module.exports = {
-    cannotvoteYourOwnLinkError() {
+    cannotVoteYourOwnLinkError() {
         throw {
             httpStatus: 403, // Forbidden
-            code: 'CANNOT_vote_OWN_LINK',
+            code: 'CANNOT_VOTE_OWN_LINK',
+            message: `You can't vote for your own link`,
+        };
+    },
+
+    cannotDeleteOtherUserLinkError() {
+        throw {
+            httpStatus: 401, // Forbidden
+            code: 'CANNOT_DELETE_OTHER_USER_LINK',
             message: `You can't vote for your own link`,
         };
     },
