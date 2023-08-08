@@ -36,19 +36,19 @@
 - **POST** - [`/users/register`] -  create a new user ✅ - eve
 - **POST**  - [`/users/login`]  - login ✅ - eve
 - **GET** - [`/users`] - see profile ➡️ `Token`- karol
-- **PUT**  - [`/users/avatar`] - see avatar ➡️ `Token`  **
+- **PUT**  - [`/users/avatar`] - see avatar ➡️ `Token`  ** NO
 - **PUT** - [`/users/password`] - change password ➡️ `Token` - karol
-- **PUT** - [`/users/email`] || - [`/users/username`] change email and or username ** 
-- **POST** - [`/users/password/recover`] - send an password recovery email ** eve
-- **PUT** - [`/users/password/reset`] - to update the password with a recovery code ** eve
+- **PUT** - [`/users/email`] || - [`/users/username`] change email and or username ** NO
+- **POST** - [`/users/password/recover`] - send an password recovery email ** ✅ eve
+- **PUT** - [`/users/password/reset`] - to update the password with a recovery code ** ✅ eve
 
 
 ## APP endpoints
 - **POST** - [`/links`] - create a post (URL, title, description) ➡️ `Token` - ana ✅
 - **GET** - [`/links`] - see list of posted links (including previous days) - ana✅
-- **GET**  - [`/links/:linkId`] -  see a specific post **✅
+- **GET**  - [`/links/:linkId`] -  see a specific post **✅ ana
 - **DELETE** - [`/links/:linkId] - erase previous posts created by user - ana
-- **POST** - [`/links/:linkId/votes`] - vote a post - pending
+- **POST** - [`/links/:linkId/votes`] - vote a post - ✅ ana
 
 **
 
