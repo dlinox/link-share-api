@@ -10,26 +10,36 @@ const selectAllLinkPostsModel = async (keyword = '', userId = '') => {
 
         // Get the list of links posted.
         const [links] = await connection.query(
-            `
-                SELECT 
-                    E.id,
-                    E.title,
-                    E.url, 
-                    U.username,
-                    E.userId = ? AS owner,
-                    E.createdAt
-                FROM links E
-                LEFT JOIN likesVotes V ON V.linkId = E.id
-                INNER JOIN users U ON U.id = E.userId
-                WHERE E.title LIKE ? OR E.url LIKE ? OR E.description LIKE ?
-                GROUP BY E.id
-                ORDER BY E.createdAt DESC
-            `,
-            [userId, userId, `%${keyword}%`, `%${keyword}%`, `%${keyword}%`]
+            `SELECT 
+                L.id,
+                L.title,
+                L.url, 
+                U.username,
+                BIT_OR(V.userId = ?) AS votedByMe, 
+                L.userId = ? AS owner,
+                AVG(IFNULL(V.value, 0)) AS votes,
+                L.createdAt
+            FROM links L
+            LEFT JOIN votes V ON V.linkId = L.id
+            INNER JOIN users U ON U.id = L.userId
+            WHERE L.title LIKE ? OR L.url LIKE ? OR L.description LIKE ?
+            GROUP BY L.id
+            ORDER BY L.createdAt DESC
+    `,
+    [userId, userId, `%${keyword}%`, `%${keyword}%`, `%${keyword}%`]
         );
 
-      // We return the links posted.
-        return links;
+            for (const link of links) {
+            // stating "votedByMe" y "owner" as boolean
+            link.votedByMe = Boolean(link.votedByMe);
+            link.owner = Boolean(link.owner);
+    
+            // The average of votes is a value of type String. We convert it to Number.
+            link.votes = Number(link.votes);
+            }
+    
+            return links;
+
     } finally {
         if (connection) connection.release();
     }

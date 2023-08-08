@@ -4,9 +4,9 @@
 
 - It is a website where users post entries on links.
 
-- Each entry has title, description, url.
+- Each post has title, description, url.
 
-- Each entry can be voted with a score between 1 and 5.
+- Each post can be voted with a score between 1 and 5.
 
 - In more detail, this API allows the following actions:
     - registration
@@ -14,7 +14,7 @@
     - share links (URL, title, description)
     - see history of posting
     - erase a post
-    - user votes (likes)
+    - user votes (votes)
     - edit user profile 
         - name
         - email
@@ -46,10 +46,9 @@
 ## APP endpoints
 - **POST** - [`/links`] - create a post (URL, title, description) ➡️ `Token` - ana ✅
 - **GET** - [`/links`] - see list of posted links (including previous days) - ana✅
-- **GET**  - [`/links/:linkId`] -  see a specific post **
+- **GET**  - [`/links/:linkId`] -  see a specific post **✅
 - **DELETE** - [`/links/:linkId] - erase previous posts created by user - ana
-- **POST** - [`/links/:linkId/votes`] - like a post - pending ana
-- **DELETE** - [`/links/:linkId/votes`] - unlike a post **
+- **POST** - [`/links/:linkId/votes`] - vote a post - pending
 
 **
 

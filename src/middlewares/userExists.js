@@ -16,7 +16,7 @@ const userExists = async (req, res, next) => {
         );
 
         if (users.length < 1) {
-            notFoundError('usuario');
+            notFoundError('user');
         }
 
         next();

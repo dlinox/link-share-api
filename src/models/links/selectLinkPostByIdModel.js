@@ -13,31 +13,31 @@ const selectLinkPostByIdModel = async (linkId, userId = '') => {
         const [links] = await connection.query(
             `
                 SELECT 
-                    E.id,
-                    E.title,
-                    E.url, 
-                    E.description,
-                    E.userId,
+                    L.id,
+                    L.title,
+                    L.url, 
+                    L.description,
+                    L.userId,
                     U.username,
                     BIT_OR(V.userId = ?) AS votedByMe, 
-                    E.userId = ? AS owner,
+                    L.userId = ? AS owner,
                     AVG(IFNULL(V.value, 0)) AS votes,
-                    E.createdAt
-                FROM entries E
-                LEFT JOIN linkVotes V ON V.linkId = E.id
-                INNER JOIN users U ON U.id = E.userId
-                WHERE E.id = ?
-                GROUP BY E.id
-                ORDER BY E.createdAt DESC
+                    L.createdAt
+                FROM links L 
+                LEFT JOIN votes V ON V.linkId = L.id
+                INNER JOIN users U ON U.id = L.userId
+                WHERE L.id = ?
+                GROUP BY L.id
+                ORDER BY L.createdAt DESC
             `,
             [userId, userId, linkId]
         );
 
-        // Establecemos como valores booleanos "votedByMe" y "owner"
+        // stating "votedByMe" y "owner" as boolean
         links[0].votedByMe = Boolean(links[0].votedByMe);
         links[0].owner = Boolean(links[0].owner);
 
-        // La media de votos es un valor de tipo String. Podemos convertirla a Number.
+        // The average of votes is a value of type String. We convert it to Number.
         links[0].votes = Number(links[0].votes);
 
         return {
