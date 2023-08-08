@@ -1,7 +1,7 @@
-// Importamos la función que devuelve una conexión con la base de datos.
+// Import the function that returns a database connection.
 const getDb = require('../../db/getDb');
 
-// Función que realiza una consulta a la base de datos para actualizar el avatar de un usuario.
+// Function that performs a database query to update a user's avatar.
 const updateUserAvatarModel = async (avatarName, userId) => {
     let connection;
 

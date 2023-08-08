@@ -34,10 +34,10 @@ app.use(express.static(process.env.UPLOADS_DIR));
 // Middleware that tells express where the routes are.
 app.use(routes);
 
-// Middleware de ruta no encontrada.
+// Route middleware not found.
 app.use(notFoundController);
 
-// Middleware de error.
+// Error middleware.
 app.use(errorController);
 
 app.listen(process.env.PORT, () => {

@@ -1,16 +1,17 @@
-// Importamos la función que devuelve una conexión con la base de datos.
+// Import the function that returns a database connection.
 const getDb = require('../db/getDb');
 
-// Importamos los errores.
+// Import errors.
 const { notFoundError } = require('../services/errorService');
 
+// Check if the posted link exists.
 const linkPostExists = async (req, res, next) => {
     let connection;
 
     try {
         connection = await getDb();
 
-        // Obtenemos el id de la entrada de los path params.
+        // Get the id from the path params.
         const { linkId } = req.params;
 
         const [links] = await connection.query(
@@ -18,12 +19,12 @@ const linkPostExists = async (req, res, next) => {
             [linkId]
         );
 
-        // we send an error if the link posted doesnt exists.
+        // Send an error if the link posted doesn't exist.
         if (links.length < 1) {
             notFoundError('link');
         }
 
-        // Pasamos el control a la siguiente función controladora.
+        // Pass control to the next controller function.
         next();
 
     } catch (err) {

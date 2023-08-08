@@ -1,15 +1,14 @@
-// Importamos la función que devuelve una conexión con la base de datos.
+// Import the function that returns a database connection.
 const getDb = require('../../db/getDb');
 
-// Función que realiza una consulta a la base de datos para obtener información de una
-// entrada concreta.
+// Function that performs a database query to retrieve information about a specific entry.
 const selectLinkPostByIdModel = async (linkId, userId = '') => {
     let connection;
 
     try {
         connection = await getDb();
 
-        // Obtenemos la información necesaria de la entrada.
+        // Get the necessary information from the entry.
         const [links] = await connection.query(
             `
                 SELECT 
@@ -33,7 +32,7 @@ const selectLinkPostByIdModel = async (linkId, userId = '') => {
             [userId, userId, linkId]
         );
 
-        // stating "votedByMe" y "owner" as boolean
+        // Setting "votedByMe" and "owner" as boolean values.
         links[0].votedByMe = Boolean(links[0].votedByMe);
         links[0].owner = Boolean(links[0].owner);
 

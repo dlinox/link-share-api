@@ -34,9 +34,9 @@
 ## Users Endpoints
 - **POST** - [`/users/register`] -  create a new user - Eve ✅
 - **POST**  - [`/users/login`]  - login - Eve ✅
-- **GET** - [`/users`] - see profile ➡️ `Token`- karol
-- **PUT**  - [`/users/avatar`] - see avatar ➡️ `Token`  **
-- **PUT** - [`/users/password`] - change password ➡️ `Token` - karol
+- **GET** - [`/users`] - see profile ➡️ `Token`- ✅ karol 
+- **PUT**  - [`/users/avatar`] - see avatar ➡️ `Token`  ** ✅ 
+- **PUT** - [`/users/password`] - change password ➡️ `Token` - karol ✅
 - **POST** - [`/users/password/recover`] - send an password recovery email - Eve ✅
 - **PUT** - [`/users/password/reset`] - to update the password with a recovery code - Eve ✅
 

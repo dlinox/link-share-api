@@ -5,12 +5,10 @@ const { cannotDeleteOtherUserLinkError } = require("../../services/errorService"
 
     const deteleLinkByIdController = async (req, res, next) => {
         try {
-        //req.userId
         const { linkId } = req.params;
     
         const link = await selectLinkPostByIdModel(linkId);
     
-        // Comprobar que el usuario del token es el mismo que creó el tweet
         if (req.user.id !== link.userId) {
             cannotDeleteOtherUserLinkError();
         }
