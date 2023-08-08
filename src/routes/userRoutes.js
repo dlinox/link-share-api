@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 //Importing final controller functions
 const {
     registerUserControllers,
@@ -10,10 +11,9 @@ const {
     editUserPassController,
     sendRecoverPassController,
     updatePasswordWithCodeController,
-    addUserAvatarController,
 } = require('../controllers/users');
 
-//Importing intermediate controller functions
+//Importing intermediate controller functions 
 const { authUser, userExists } = require('../middlewares');
 
 // User register
