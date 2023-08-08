@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
+const fileUpload = require('express-fileupload');
+
 // We create the server.
 const app = express();
 // Temporary storage for shared links
@@ -20,6 +22,10 @@ const {
 
 // Middleware that shows the console information about the incoming request.
 app.use(morgan('dev'));
+
+app.use(fileUpload());
+
+app.use(express.static(process.env.UPLOADS_DIR));
 
 // Middleware that tells express where the routes are.
 app.use(routes);

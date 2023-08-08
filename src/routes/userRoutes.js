@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 
-
 //Importing final controller functions
 const {
     registerUserControllers,
@@ -11,9 +10,10 @@ const {
     editUserPassController,
     sendRecoverPassController,
     updatePasswordWithCodeController,
+    addUserAvatarController,
 } = require('../controllers/users');
 
-//Importing intermediate controller functions 
+//Importing intermediate controller functions
 const { authUser, userExists } = require('../middlewares');
 
 // User register
@@ -28,8 +28,13 @@ router.get('/users', authUser, userExists, getOwnUserController);
 // Change pwd
 router.put('/users/password', authUser, userExists, editUserPassController);
 
-router.post('/users/password/recover', sendRecoverPassController); // required temporary pass to change the pass
+// required temporary pass to change the pass
+router.post('/users/password/recover', sendRecoverPassController); 
 
-router.put('/users/password/recover', updatePasswordWithCodeController); // to add new pass
+// to add new pass
+router.put('/users/password/recover', updatePasswordWithCodeController); 
+
+// add avatar
+router.patch('/users/avatar', authUser, userExists, addUserAvatarController);
 
 module.exports = router;

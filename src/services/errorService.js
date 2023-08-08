@@ -7,6 +7,14 @@ module.exports = {
         };
     },
 
+    saveFileError() {
+        throw {
+            httpStatus: 500, // Internal Server Error
+            code: 'FILE_SAVE_FAILED',
+            message: 'Error al guardar el archivo en el disco',
+        };
+    },
+
     cannotDeleteOtherUserLinkError() {
         throw {
             httpStatus: 401, // Forbidden
@@ -14,13 +22,13 @@ module.exports = {
             message: `You can't delete a link posted that is not yours`,
         };
     },
-    
+
     emailAlreadyRegistered() {
         throw {
-            httpStatus: 401,// Unauthorized
+            httpStatus: 401, // Unauthorized
             code: 'INVALID_CREDENTIALS',
-            message:'The email is already registered'
-        }
+            message: 'The email is already registered',
+        };
     },
 
     invalidCredentialsError() {
@@ -30,7 +38,7 @@ module.exports = {
             message: 'Invalid credentials',
         };
     },
-    
+
     missingFieldsError() {
         throw {
             httpStatus: 400, // bad request
@@ -75,10 +83,9 @@ module.exports = {
         throw {
             httpStatus: 401, // Unauthorized
             code: 'INVALID_CREDENTIALS',
-            message:'There is already a user with this username'
-        }
+            message: 'There is already a user with this username',
+        };
     },
-
 
     voteAlreadyExistsError() {
         throw {
@@ -86,5 +93,5 @@ module.exports = {
             code: 'vote_ALREADY_EXISTS',
             message: 'You cannot vote more than once for the same link.',
         };
-    }
+    },
 };
