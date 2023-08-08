@@ -63,6 +63,14 @@ module.exports = {
         };
     },
 
+    saveFileError() {
+        throw {
+            httpStatus: 500, // Internal Server Error
+            code: 'FILE_SAVE_FAILED',
+            message: 'Error al guardar el archivo en el disco',
+        };
+    },
+
     sendEmailError() {
         throw {
             httpStatus: 500, // Internal server error
