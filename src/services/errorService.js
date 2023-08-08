@@ -55,6 +55,14 @@ module.exports = {
         };
     },
 
+    sendEmailError() {
+        throw {
+            httpStatus: 500, // Internal server error
+            code: 'SEND_EMAIL_FAILED',
+            message: 'Error al enviar email',
+        };
+    },
+
     userWithUserNameAlreadyExitsError() {
         throw {
             httpStatus: 401, // Unauthorized
