@@ -1,9 +1,12 @@
+const { updatePasswordWithCodeModel } = require('../../models/users');
+
 const updatePasswordWithCodeController =  async(req, res, next) => {
     
     try {
-       const { email, code } = req.body
+       const { email, code, password } = req.body
+       await updatePasswordWithCodeModel(email, code, password,)
         res.status(201).json({
-            email, code
+            email, code, password
         });
     } catch (err) {
         next(err); 

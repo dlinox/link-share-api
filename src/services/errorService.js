@@ -55,6 +55,14 @@ module.exports = {
         };
     },
 
+    recoveryNotMatchError() {
+        throw {
+            httpStatus: 500, // Internal server error
+            code: 'RECOVERY_PASS_NOT_MATCH',
+            message: 'El código de recuperación no es valido',
+        };
+    },
+
     sendEmailError() {
         throw {
             httpStatus: 500, // Internal server error
