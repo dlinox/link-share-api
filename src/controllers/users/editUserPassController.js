@@ -8,7 +8,7 @@ const editUserPassController = async (req, res, next) => {
 
         res.send({
             status: 'ok',
-            message: 'Contraseña actualizada',
+            message: 'Password updated',
         });
     } catch (err) {
         next(err);

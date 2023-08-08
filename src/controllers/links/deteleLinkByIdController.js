@@ -8,15 +8,12 @@ const { cannotDeleteOtherUserLinkError } = require("../../services/errorService"
         //req.userId
         const { linkId } = req.params;
     
-        // Conseguir la información del tweet que quiero borrar
         const link = await selectLinkPostByIdModel(linkId);
     
-        // Comprobar que el usuario del token es el mismo que creó el tweet
         if (req.userId !== link.user_id) {
             cannotDeleteOtherUserLinkError();
         }
     
-        // Borrar el tweet
         await deteleLinkPostByIdModel(linkId);
 
         res.send({

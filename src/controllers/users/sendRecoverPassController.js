@@ -1,3 +1,5 @@
+const randomstring = require('randomstring');
+
 const getDb = require('../../db/getDb');
 const { invalidCredentialsError } = require('../../services/errorService');
 const sendMailService = require('../../services/sendEmailService');
@@ -21,7 +23,9 @@ const sendRecoverPassController =  async(req, res, next) => {
         if (!email) {
             invalidCredentialsError();
         }
-        sendEmail(email, next);
+        const recoverPassCode = randomstring.generate(10);
+
+        sendEmail(email, recoverPassCode, next);
 
         res.status(201).json({
             status:'ok',
@@ -37,20 +41,18 @@ const sendRecoverPassController =  async(req, res, next) => {
     }
 }
 
-const sendEmail = async(email, next) => {
-    const recoverPassCode = "123"
-    // Usar sendEmail service para enviar el email
-    // Creamos el asunto del email de recuperación de contraseña.
+const sendEmail = async(email, recoverPassCode, next) => {
+    // We create the subject of the password recovery email.
     const emailSubject =
-    'Recuperación de contraseña en Link Share Api';
+    'Password recovery in Link Share Api';
 
-    // Creamos el contenido del email
+    // Create the email content
     const emailBody = `
-    Se ha solicitado la recuperación de contraseña para este email en Diaro de Viajes. 
+    Password recovery has been requested for this email in Link Share Api. 
         
-    Utiliza el siguiente código para crear una nueva contraseña: ${recoverPassCode}
+    Use the following code to create a new password: ${recoverPassCode}
 
-    Si no has sido tú ignora este email.
+    If it was not you, please ignore this email.
     `;
     await sendMailService(email, emailSubject, emailBody, next);
 }
