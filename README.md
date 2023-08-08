@@ -45,9 +45,9 @@
 ## APP endpoints
 - **POST** - [`/links`] - create a post (URL, title, description) ➡️ `Token` - ana ✅
 - **GET** - [`/links`] - see list of posted links (including previous days) - ana✅
-- **GET**  - [`/links/:linkId`] -  see a specific post **✅
+- **GET**  - [`/links/:linkId`] -  see a specific post ana✅
 - **DELETE** - [`/links/:linkId] - erase previous posts created by user - ana✅
-- **POST** - [`/links/:linkId/votes`] - vote a post - pending
+- **POST** - [`/links/:linkId/votes`] - vote a post - ana✅
 
 **
 
