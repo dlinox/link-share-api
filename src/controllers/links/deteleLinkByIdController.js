@@ -12,7 +12,7 @@ const { cannotDeleteOtherUserLinkError } = require("../../services/errorService"
         const link = await selectLinkPostByIdModel(linkId);
     
         // Comprobar que el usuario del token es el mismo que creó el tweet
-        if (req.userId !== link.user_id) {
+        if (req.user.id !== link.userId) {
             cannotDeleteOtherUserLinkError();
         }
     
