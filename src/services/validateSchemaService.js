@@ -4,7 +4,7 @@ const validateSchemaService = async (schema, body, next) => {
     } catch (err) {
         err.httpStatus = 400; // Bad Request
         err.code = 'MISSING_FIELDS';
-        next(err);
+        throw err;
     }
 };
 

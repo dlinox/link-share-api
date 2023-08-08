@@ -3,7 +3,8 @@ const insertLinkVoteModel = require("../../models/links/inserLinkVoteModel");
 const selectLinkPostByIdModel = require("../../models/links/selectLinkPostByIdModel");
 
 // Importing errors
-const { cannotvoteYourOwnLinkError } = require("../../services/errorService");
+const { cannotVoteYourOwnLinkError } = require("../../services/errorService");
+
 
 // Importing schemas
 const voteLinkSchema = require("../../schema/links/voteLinkSchema");
@@ -24,7 +25,8 @@ const votePostedLinkController = async (req, res, next) => {
         const link = await selectLinkPostByIdModel(linkId);
 
         // If we are the owners of the link we throw an error.
-        if (link.userId === req.user.id){ cannotvoteYourOwnLinkError();
+        if (link.userId === req.user.id){ 
+            cannotVoteYourOwnLinkError();
         }
 
         // Insert the vote and obtain the new average.

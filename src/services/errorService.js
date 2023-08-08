@@ -11,7 +11,7 @@ module.exports = {
         throw {
             httpStatus: 401, // Forbidden
             code: 'CANNOT_DELETE_OTHER_USER_LINK',
-            message: `You can't vote for your own link`,
+            message: `You can't delete a link posted that is not yours`,
         };
     },
     
