@@ -9,6 +9,7 @@ const {
     loginUserController,
     getOwnUserController,
     editUserPassController,
+    sendRecoverPassController,
 } = require('../controllers/users');
 
 //Importing intermediate controller functions 
@@ -25,5 +26,7 @@ router.get('/users', authUser, userExists, getOwnUserController);
 
 // Change pwd
 router.put('/users/password', authUser, userExists, editUserPassController);
+
+router.post('/users/password/recover', sendRecoverPassController);
 
 module.exports = router;
