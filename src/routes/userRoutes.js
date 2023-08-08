@@ -28,8 +28,10 @@ router.get('/users', authUser, userExists, getOwnUserController);
 // Change pwd
 router.put('/users/password', authUser, userExists, editUserPassController);
 
-router.post('/users/password/recover', sendRecoverPassController); // required temporary pass to change the pass
+// request temporary code to change the pass
+router.post('/users/password/recover', sendRecoverPassController); 
 
-router.put('/users/password/recover', updatePasswordWithCodeController); // to add new pass
+ // to add new pass with temporary code
+router.put('/users/password/recover', updatePasswordWithCodeController);
 
 module.exports = router;
