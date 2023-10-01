@@ -13,6 +13,7 @@ const selectAllLinkPostsModel = async (keyword = '', userId = '') => {
             `SELECT 
                 L.id,
                 L.title,
+                L.description,
                 L.url, 
                 U.username,
                 BIT_OR(V.userId = ?) AS votedByMe, 

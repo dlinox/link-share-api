@@ -13,9 +13,11 @@ const getDb = require('../../db/getDb');
 
 //importing errors
 const { emailAlreadyRegistered } = require('../../services/errorService');
-const { userWithUserNameAlreadyExitsError } = require('../../services/errorService');
+const {
+    userWithUserNameAlreadyExitsError,
+} = require('../../services/errorService');
 const validateSchemaService = require('../../services/validateSchemaService');
-const { registerUserSchema }= require('../../schema/users');
+const { registerUserSchema } = require('../../schema/users');
 
 // Final controller function that adds a user
 const registerUserController = async (req, res, next) => {
@@ -44,10 +46,11 @@ const registerUserController = async (req, res, next) => {
         [users] = await connection.query(
             `SELECT * FROM users WHERE username = ?`,
             [userName]
-        )
-            if (users.length > 0) {
-                userWithUserNameAlreadyExitsError();
-            }
+        );
+        
+        if (users.length > 0) {
+            userWithUserNameAlreadyExitsError();
+        }
 
         await connection.beginTransaction();
 
@@ -65,22 +68,18 @@ const registerUserController = async (req, res, next) => {
                     id: user.id,
                     email: user.email,
                     username: user.userName,
-                    avatar: null
+                    avatar: null,
                 },
                 token: getJwtToken(user.id),
             },
         });
-        
-
-
     } catch (err) {
-        
         await connection.rollback();
 
-        next(err); 
+        next(err);
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 module.exports = registerUserController;

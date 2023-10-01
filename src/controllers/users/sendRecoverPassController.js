@@ -1,22 +1,47 @@
+
+//importing database
+const getDb = require('../../db/getDb');
+
 const randomstring = require('randomstring');
 
 const { updateRecoveryPassCodeModel } = require('../../models/users');
 const sendMailService = require('../../services/sendEmailService');
 
+
+
 const sendRecoverPassController =  async(req, res, next) => {
     
+    let connection;
     try {
+        connection = await getDb();
         
         const recoverPassCode = randomstring.generate(10);
         const { email } = req.body;
 
-        await updateRecoveryPassCodeModel(email, recoverPassCode, next);
-        sendEmail(email, recoverPassCode, next);
+     
 
-        res.status(201).json({
-            status:'ok',
-            messages:'We have sent you an email. Please check your inbox.'
-        });
+        let [users] = await connection.query(
+            `SELECT * FROM users WHERE email = ?`,
+            [email]
+        );
+
+        if (users.length > 0) {
+            res.status(201).json({
+                status:'ok',
+                message:'We have sent you an email. Please check your inbox.',
+                data: users
+            });
+
+            await updateRecoveryPassCodeModel(email, recoverPassCode, next);
+            sendEmail(email, recoverPassCode, next);
+        }
+        else{
+            res.status(401).json({
+                status:'error',
+                message:'The entered email is not in our records.'
+            });
+        }
+       
     } catch (err) {
         next(err); 
     } 
