@@ -35,6 +35,7 @@ const editUserAvatarController = async (req, res, next) => {
         res.send({
             status: 'ok',
             message: 'User updated',
+            data: avatarName
         });
     } catch (err) {
         next(err);

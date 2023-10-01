@@ -57,13 +57,21 @@ const registerUserController = async (req, res, next) => {
         );
 
         await connection.commit();
-        
+
         res.status(201).json({
-            id: user.id,
-            email: user.email, 
-            userName: user.userName,
-            token: getJwtToken(id)
+            status: 'ok',
+            data: {
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    username: user.userName,
+                    avatar: null
+                },
+                token: getJwtToken(user.id),
+            },
         });
+        
+
 
     } catch (err) {
         
