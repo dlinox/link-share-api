@@ -4,7 +4,6 @@ const uuid = require('uuid');
 //Importing database
 const getDb = require('../../db/getDb');
 
-
 const deteleLinkPostByIdModel = async (linkId) => {
     let connection;
   

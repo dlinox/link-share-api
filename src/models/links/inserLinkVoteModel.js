@@ -3,7 +3,6 @@ const uuid = require('uuid');
 
 //Importing database
 const getDb = require('../../db/getDb');
-
 // Importing errors
 const { voteAlreadyExistsError } = require('../../services/errorService');
 

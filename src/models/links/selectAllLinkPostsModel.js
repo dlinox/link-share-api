@@ -12,7 +12,9 @@ const selectAllLinkPostsModel = async ({
     let connection;
 
     try {
+
         connection = await getDb();
+        console.log(connection);
 
         // Get the list of links posted.
         const [links] = await connection.query(
