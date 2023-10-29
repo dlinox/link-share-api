@@ -1,11 +1,41 @@
-const linkPreviewGenerator = require('link-preview-generator');
+const { URL } = require('url');
+
+const getMetaDataLink = async (_url) => {
+    try {
+        let fetch = await import('node-fetch');
+        const cheerio = require('cheerio');
+        let res = await fetch.default(_url);
+        let html = await res.text();
+        const $ = cheerio.load(html);
+
+        const myURL = new URL(_url);
+        const domain = myURL.hostname;
+
+        const title = $('title').text();
+        const description = $('meta[name="description"]').attr('content');
+        const image = $('meta[property="og:image"]').attr('content');
+        const icon = $('link[type="image/x-icon"]').attr('href');
+
+        const metadata = {
+            title: title === undefined ? null : title,
+            description: description === undefined ? null : description,
+            img: image === undefined ? null : image,
+            favicon: icon === undefined ? null : icon,
+            domain: domain === undefined ? null : domain,
+        };
+        return metadata;
+    } catch (error) {
+        return false;
+    }
+
+    // metadataResponse = metadata;
+};
 
 const getLinkPreviewController = async (req, res, next) => {
     try {
         const { url } = req.query;
 
-        // Obtén la previsualización del enlace
-        const resPreview = await linkPreviewGenerator(url);
+        let resPreview = await getMetaDataLink(url);
 
         let dataResponse = {
             status: 'ok',
@@ -13,14 +43,13 @@ const getLinkPreviewController = async (req, res, next) => {
             message: null,
         };
 
-        if (resPreview.status === 'error') {
+        if (!resPreview) {
             dataResponse.status = 'error';
-            dataResponse.message = resPreview.message;
+            dataResponse.message = 'Invalid url';
         } else {
             dataResponse.message = 'success';
             dataResponse.data = resPreview;
         }
-
         res.json(dataResponse);
     } catch (err) {
         next(err);
