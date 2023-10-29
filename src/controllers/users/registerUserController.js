@@ -42,6 +42,7 @@ const registerUserController = async (req, res, next) => {
         if (users.length > 0) {
             emailAlreadyRegistered();
         }
+        
         // Check if the userName doesn't exist in the database, and if it does, throw an error.
         [users] = await connection.query(
             `SELECT * FROM users WHERE username = ?`,

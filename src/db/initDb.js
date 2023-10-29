@@ -42,8 +42,14 @@ const main = async () => {
                 id CHAR(36) PRIMARY KEY NOT NULL,
                 title VARCHAR(200) NOT NULL,
                 url VARCHAR(200) NOT NULL,
+                
+                favicon VARCHAR(200) NOT NULL,
+                image VARCHAR(250) DEFAULT NULL,
+                domain VARCHAR(200) NOT NULL,
+                
                 description TEXT NOT NULL,
                 userId CHAR(36) NOT NULL,
+
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
                 FOREIGN KEY (userId) REFERENCES users(id)
                 )

@@ -1,10 +1,10 @@
 //Importing controllers
-const deteleLinkByIdController = require("./deteleLinkByIdController");
-const getLinkController = require("./getLinkController");
-const listLinksController = require("./listLinksController");
-const newLinkController = require("./newLinkController");
-const votePostedLinkController = require("./votePostedLinkController");
-
+const deteleLinkByIdController = require('./deteleLinkByIdController');
+const getLinkController = require('./getLinkController');
+const listLinksController = require('./listLinksController');
+const newLinkController = require('./newLinkController');
+const votePostedLinkController = require('./votePostedLinkController');
+const getLinkPreviewController = require('./getLinkPreviewController');
 
 //Exporting controllers
 module.exports = {
@@ -13,4 +13,5 @@ module.exports = {
     newLinkController,
     votePostedLinkController,
     deteleLinkByIdController,
+    getLinkPreviewController,
 };

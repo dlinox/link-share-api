@@ -12,6 +12,7 @@ const {
     sendRecoverPassController,
     updatePasswordWithCodeController,
     editUserAvatarController,
+    editUserProfileController,
 } = require('../controllers/users');
 
 //Importing intermediate controller functions 
@@ -28,6 +29,9 @@ router.get('/users', authUser, userExists, getOwnUserController);
 
 // Change pwd
 router.put('/users/password', authUser, userExists, editUserPassController);
+
+
+router.put('/users/update-profile', authUser, userExists, editUserProfileController);
 
 // required temporary code to change the pass
 router.post('/users/password/recover', sendRecoverPassController); 

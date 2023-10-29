@@ -13,11 +13,13 @@ const joiErrorMessages = {
     'object.unknown': 'No additional fields are allowed on this object',
 };
 
-
 // We create Joi's schema where we check all the necessary properties.
 const newLinkSchema = joi.object({
     title: joi.string().min(5).max(200).required().messages(joiErrorMessages),
     url: joi.string().min(3).max(300).required().messages(joiErrorMessages),
+    image: joi.allow(null).messages(joiErrorMessages),
+    domain: joi.allow(null).messages(joiErrorMessages),
+    favicon: joi.allow(null).messages(joiErrorMessages),
     description: joi
         .string()
         .min(10)

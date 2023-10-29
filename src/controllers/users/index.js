@@ -6,6 +6,7 @@ const editUserPassController = require('./editUserPassController');
 const sendRecoverPassController = require('./sendRecoverPassController');
 const updatePasswordWithCodeController = require('./updatePasswordWithCodeController');
 const editUserAvatarController = require('./editUserAvatarController');
+const editUserProfileController = require('./editUserProfileController');
 
 //Exporting users controllers
 module.exports = {
@@ -16,4 +17,5 @@ module.exports = {
     sendRecoverPassController,
     updatePasswordWithCodeController,
     editUserAvatarController,
+    editUserProfileController
 };

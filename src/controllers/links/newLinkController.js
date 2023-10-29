@@ -8,22 +8,19 @@ const { missingFieldsError } = require('../../services/errorService');
 const validateSchemaService = require('../../services/validateSchemaService');
 
 //importing schema
-const newLinkSchema = require ('../../schema/links/newLinkSchema')
+const newLinkSchema = require('../../schema/links/newLinkSchema');
 
-// Controller function that controls a new link posted 
+// Controller function that controls a new link posted
 const newLinkController = async (req, res, next) => {
     try {
-        const { id, title, url, description } = req.body;
+        const { id, title, url, description, image, domain, favicon } =
+            req.body;
 
         // We validate the bodysuit with Joi
-        await validateSchemaService(
-            newLinkSchema,
-            Object.assign(req.body)
-            );
+        await validateSchemaService(newLinkSchema, Object.assign(req.body));
 
-        if(!title || !url || !description ) {
-            throw new  missingFieldsError();
-            
+        if (!title || !url || !description) {
+            throw new missingFieldsError();
         }
 
         // Inserting the new link post in the db and we get the assigned ID
@@ -32,6 +29,9 @@ const newLinkController = async (req, res, next) => {
             title,
             url,
             description,
+            image,
+            domain,
+            favicon,
             req.user.id
         );
 
@@ -42,13 +42,16 @@ const newLinkController = async (req, res, next) => {
                     id: linkId,
                     title,
                     url,
+
+                    image,
+                    domain,
+                    favicon,
                     description,
                     userId: req.user.id,
                     createdAt: new Date(),
                 },
             },
         });
-
     } catch (err) {
         next(err);
     }
