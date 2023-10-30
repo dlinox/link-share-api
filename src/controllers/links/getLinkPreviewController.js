@@ -16,7 +16,7 @@ const getMetaDataLink = async (_url) => {
         const image = $('meta[property="og:image"]').attr('content');
 
         const icon = $('link[type="image/x-icon"]').attr('href');
-        icon = icon === undefined ? $('link[rel="icon"]').attr('href') : icon;
+        // icon = icon === undefined ? $('link[rel="icon"]').attr('href') : icon;
 
         const metadata = {
             title: title === undefined ? null : title,
