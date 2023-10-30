@@ -14,11 +14,14 @@ const getMetaDataLink = async (_url) => {
         const title = $('title').text();
         const description = $('meta[name="description"]').attr('content');
         const image = $('meta[property="og:image"]').attr('content');
+
         const icon = $('link[type="image/x-icon"]').attr('href');
+        icon = icon === undefined ? $('link[rel="icon"]').attr('href') : icon;
 
         const metadata = {
             title: title === undefined ? null : title,
-            description: description === undefined ? null : description,
+            description:
+                description === undefined ? 'Sin descripción' : description,
             img: image === undefined ? null : image,
             favicon: icon === undefined ? null : icon,
             domain: domain === undefined ? null : domain,
