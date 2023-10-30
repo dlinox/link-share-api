@@ -43,9 +43,9 @@ const main = async () => {
                 title VARCHAR(200) NOT NULL,
                 url VARCHAR(200) NOT NULL,
                 
-                favicon VARCHAR(200) NOT NULL,
+                favicon VARCHAR(200) DEFAULT NULL,
                 image VARCHAR(250) DEFAULT NULL,
-                domain VARCHAR(200) NOT NULL,
+                domain VARCHAR(200) DEFAULT NULL,
                 
                 description TEXT NOT NULL,
                 userId CHAR(36) NOT NULL,
