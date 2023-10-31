@@ -12,7 +12,6 @@ const selectAllLinkPostsModel = async ({
     let connection;
 
     try {
-
         connection = await getDb();
         console.log(connection);
 
@@ -27,6 +26,7 @@ const selectAllLinkPostsModel = async ({
                 L.image,
                 L.url, 
                 U.username,
+                U.avatar
                 BIT_OR(V.userId = ?) AS votedByMe, 
                 L.userId = ? AS owner,
                 AVG(IFNULL(V.value, 0)) AS votes,
